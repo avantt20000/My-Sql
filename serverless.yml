@@ -1,0 +1,124 @@
+service: contact-service
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: dev
+  region: us-east-1
+
+functions:
+  createContact:
+    handler: handlers/contactHandler.createContact
+    events:
+      - http:
+          path: contacts
+          method: post
+          cors: true
+  getAllContacts:
+    handler: handlers/contactHandler.getAllContacts
+    events:
+      - http:
+          path: contacts
+          method: get
+          cors: true
+  getContactById:
+    handler: handlers/contactHandler.getContactById
+    events:
+      - http:
+          path: contacts/{id}
+          method: get
+          cors: true
+  updateContact:
+    handler: handlers/contactHandler.updateContact
+    events:
+      - http:
+          path: contacts/{id}
+          method: put
+          cors: true
+  deleteContact:
+    handler: handlers/contactHandler.deleteContact
+    events:
+      - http:
+          path: contacts/{id}
+          method: delete
+          cors: true
+  createContactReward:
+    handler: handlers/contactRewardsHandler.createContactReward
+    events:
+      - http:
+          path: contactsRewards
+          method: post
+          cors: true
+  getAllContactRewards:
+    handler: handlers/contactRewardsHandler.getAllContactRewards
+    events:
+      - http:
+          path: contactsRewards
+          method: get
+          cors: true
+  getContactRewardById:
+    handler: handlers/contactRewardsHandler.getContactRewardById
+    events:
+      - http:
+          path: contactsRewards/{id}
+          method: get
+          cors: true
+  updateContactReward:
+    handler: handlers/contactRewardsHandler.updateContactReward
+    events:
+      - http:
+          path: contactsRewards/{id}
+          method: put
+          cors: true
+  deleteContactReward:
+    handler: handlers/contactRewardsHandler.deleteContactReward
+    events:
+      - http:
+          path: contactsRewards/{id}
+          method: delete
+          cors: true
+  getRewardsForContact:
+    handler: handlers/contactRewardsHandler.getRewardsForContact
+    events:
+      - http:
+          path: contacts/{contactId}/rewards
+          method: get
+          cors: true
+  createReward:
+    handler: handlers/rewardsHandler.createReward
+    events:
+      - http:
+          path: rewards
+          method: post
+          cors: true
+  getAllRewards:
+    handler: handlers/rewardsHandler.getAllRewards
+    events:
+      - http:
+          path: rewards
+          method: get
+          cors: true
+  getRewardById:
+    handler: handlers/rewardsHandler.getRewardById
+    events:
+      - http:
+          path: rewards/{id}
+          method: get
+          cors: true
+  updateReward:
+    handler: handlers/rewardsHandler.updateReward
+    events:
+      - http:
+          path: rewards/{id}
+          method: put
+          cors: true
+  deleteReward:
+    handler: handlers/rewardsHandler.deleteReward
+    events:
+      - http:
+          path: rewards/{id}
+          method: delete
+          cors: true
+
+plugins:
+  - serverless-offline
